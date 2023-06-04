@@ -1,0 +1,107 @@
+.play_field
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    height: 100vh
+    background-image: url(/assets/img/bgr.jpg)
+    background-size: cover
+    background-repeat: no-repeat
+
+.player_icon
+    position: absolute
+    right: 0
+    
+.z_index
+    z-index: 1
+
+.d_none
+    display: none
+
+.cover_card
+    height: 351px
+    width: 250px
+    position: absolute
+    top: 25px
+    right: 24px
+    border-radius: 10px
+    border: 1px solid #000
+    
+
+.card_stack
+    margin-left: 140px
+    margin-bottom: 20px
+    position: relative
+    border-radius: 10px
+
+.played_card
+    transform: scale(1) translateX(325px) translateY(-234px) rotate(10deg)
+    height: 363px
+    width: 250px
+    img
+        position: absolute
+        height: 100%
+        width: 100%
+
+.flipp_box
+    transition: 200ms
+    height: 350px
+    width: 250px
+    position: absolute
+    top: 25px
+    right: 25px
+    perspective: 1000px
+
+.flip-box-inner
+    position: relative
+    transform-style: preserve-3d
+    img
+        height: 100%
+        width: 100%
+
+.flip-box-back
+    position: absolute
+    transition: 200ms
+    transform: rotateY(180deg)  translateX(-30px)
+    
+
+.flip-box-front, .flip-box-back
+    position: absolute
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+
+.flip-box-front
+    img
+        border-radius: 10px
+        border: 1px solid #000
+        cursor: pointer
+
+.card
+    position: absolute
+    border-radius: 10px
+    border: 1px solid #000
+    height: 350px
+
+.rotate
+    img
+        display: block 
+    transform: rotateY(180deg)   
+    transition: transform 0.5s
+    
+
+.top_card_hover
+    transition: 200ms
+    &:hover
+        transform: translateX(-30px)
+
+.put_on_table
+    transform: scale(1) translateX(240px) translateY(-430px) rotate(10deg)
+    animation: card_animation 1.2s
+
+@keyframes card_animation
+    0%
+        transform: scale(1)
+    50%
+        transform: scale(1.5)
+    100%
+        transform: scale(1) translateX(240px) translateY(-430px) rotate(10deg)

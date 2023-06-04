@@ -1,0 +1,29 @@
+<app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px' : 150 + (150*i)}" [name]=player
+    class="player_icon"></app-player>
+<div class="play_field">
+    <div class="played_card">
+        <img *ngFor="let card of game.played_cards" src="/assets/img/cards/{{ card }}">
+    </div>
+
+    <div class="card_stack">
+        <img src="/assets/img/cards/card_cover.jpg" class="cover_card" [class.z_index]="!d_none">
+        <img *ngFor="let card of [0,1,2,3,4]; let i = index;" [ngStyle]="{'right.px' : i*5, 'top.px' : i*5}"
+            src="/assets/img/cards/card_cover.jpg" alt="" class="card">
+        <img src="/assets/img/cards/card_cover.jpg" class="cover_card">
+        <div class="flipp_box">
+            <div class="flip-box-inner" [class.rotate]="pick_card_animation">
+                <div class="flip-box-front">
+                    <img (click)="pickCard()" [class.top_card_hover]="!pick_card_animation"
+                        src="/assets/img/cards/card_cover.jpg" alt="">
+                </div>
+                <div class="flip-box-back">
+                    <img src="/assets/img/cards/{{ top_card }}" [class.put_on_table]="put_on_table_animation"
+                        class="d_none">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+  </button>
