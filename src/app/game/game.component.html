@@ -1,8 +1,8 @@
-<app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px' : 150 + (150*i)}" [name]=player
-    class="player_icon"></app-player>
+<app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px' : 100 + (100*i)}" [name]=player [player_active]="i == game.current_player"
+    class="player_icon" ></app-player>
 <div class="play_field">
-    <div class="played_card">
-        <img *ngFor="let card of game.played_cards" src="/assets/img/cards/{{ card }}">
+    <div class="played_card ">
+        <img *ngFor="let card of game.played_cards; let i = index;" src="/assets/img/cards/{{ card }}.png" [class.visible]="!played_card">
     </div>
 
     <div class="card_stack">
@@ -17,13 +17,14 @@
                         src="/assets/img/cards/card_cover.jpg" alt="">
                 </div>
                 <div class="flip-box-back">
-                    <img src="/assets/img/cards/{{ top_card }}" [class.put_on_table]="put_on_table_animation"
+                    <img src="/assets/img/cards/{{ top_card }}.png" [class.put_on_table]="put_on_table_animation"
                         class="d_none">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+<app-drink-description [card]="top_card" class="card_drink"></app-drink-description><app-drink-description [card]="top_card" class="card_drink"></app-drink-description>
+<button (click)="openDialog()" mat-fab color="primary" class="button_add">
     <mat-icon>add</mat-icon>
   </button>
