@@ -9,9 +9,19 @@
   background-repeat: no-repeat;
 }
 
+.card_drink {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  width: 400px;
+}
+
 .player_icon {
   position: absolute;
   right: 0;
+}
+.player_icon:hover {
+  cursor: pointer;
 }
 
 .z_index {
@@ -20,6 +30,10 @@
 
 .d_none {
   display: none;
+}
+
+.visible {
+  visibility: hidden;
 }
 
 .cover_card {
@@ -59,14 +73,14 @@
   right: 25px;
   perspective: 1000px;
 }
+.flipp_box img {
+  height: 100%;
+  width: 100%;
+}
 
 .flip-box-inner {
   position: relative;
   transform-style: preserve-3d;
-}
-.flip-box-inner img {
-  height: 100%;
-  width: 100%;
 }
 
 .flip-box-back {
@@ -95,11 +109,9 @@
 }
 
 .rotate {
+  display: block;
   transform: rotateY(180deg);
   transition: transform 0.5s;
-}
-.rotate img {
-  display: block;
 }
 
 .top_card_hover {
@@ -107,6 +119,34 @@
 }
 .top_card_hover:hover {
   transform: translateX(-30px);
+}
+
+.notice_player_div {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.notice_player {
+  margin-right: 35px;
+  font-weight: bolder;
+  color: #fff;
+  font-size: 20px;
+  animation: bounce 1s infinite;
+}
+
+.mobile_player {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  color: #fff;
+  background-color: #C2185B;
+}
+.mobile_player:hover {
+  cursor: pointer;
 }
 
 .put_on_table {
@@ -123,5 +163,122 @@
   }
   100% {
     transform: scale(1) translateX(240px) translateY(-430px) rotate(10deg);
+  }
+}
+@keyframes card_animation_mobile {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1) translateY(-300px);
+  }
+}
+@keyframes card_animation_mobile_se {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1) translateY(-255px);
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@media screen and (max-width: 1900px) {
+  .player_icon {
+    left: 0;
+    margin-top: 300px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .cover_card {
+    height: 301px;
+    width: 200px;
+  }
+  .card {
+    height: 300px;
+    width: 200px;
+  }
+  .flipp_box {
+    height: 300px;
+    width: 200px;
+  }
+  .played_card {
+    transform: scale(1) translateX(325px) translateY(-265px) rotate(10deg);
+    height: 300px;
+    width: 200px;
+  }
+  .flip-box-front, .flip-box-back {
+    height: 301px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .card_drink {
+    top: unset;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 2;
+  }
+  .d_none_mobile {
+    display: none;
+  }
+  .mobile_player {
+    visibility: visible;
+  }
+  .notice_player_div {
+    bottom: unset;
+    top: 11px;
+    right: 25px;
+  }
+  .put_on_table {
+    transform: scale(1) translateY(-300px);
+    animation: card_animation_mobile 1.2s;
+  }
+  .played_card {
+    transform: scale(1) translateY(-185px) translateX(85px);
+    height: 200px;
+    width: 130px;
+  }
+  .cover_card {
+    height: 200px;
+    width: 130px;
+  }
+  .card {
+    height: 200px;
+    width: 130px;
+  }
+  .flipp_box {
+    height: 200px;
+    width: 130px;
+  }
+  .flip-box-front, .flip-box-back {
+    height: 200px;
+  }
+  .notice_player {
+    font-size: 17px;
+  }
+}
+@media screen and (max-height: 741px) {
+  .played_card {
+    transform: scale(1) translateY(-140px) translateX(85px);
+  }
+  .put_on_table {
+    transform: scale(1) translateY(-255px);
+    animation: card_animation_mobile_se 1.2s;
   }
 }/*# sourceMappingURL=game.component.css.map */

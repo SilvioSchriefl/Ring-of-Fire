@@ -1,0 +1,12 @@
+.avatar_div img {
+  height: 60px;
+  margin: 5px;
+  cursor: pointer;
+}
+.avatar_div img:hover {
+  transform: scale(1.1);
+}
+
+.choosen {
+  transform: scale(1.1);
+}/*# sourceMappingURL=dialog-change-avatar.component.css.map */

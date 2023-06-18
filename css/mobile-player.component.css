@@ -1,0 +1,12 @@
+.player {
+  padding-left: 15px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.player img {
+  height: 60px;
+}/*# sourceMappingURL=mobile-player.component.css.map */

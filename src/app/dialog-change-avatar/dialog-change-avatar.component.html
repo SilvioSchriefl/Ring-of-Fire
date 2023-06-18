@@ -1,0 +1,4 @@
+<div  class="avatar_div">
+    <h1 mat-dialog-title>select a profile picture</h1>
+    <button><img *ngFor="let img of avatar_images; let i = index" src="/assets/img/{{ img }}.png" [mat-dialog-close]="img"></button>
+</div>

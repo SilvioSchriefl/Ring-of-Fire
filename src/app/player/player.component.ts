@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { RingFirestoreService } from '../ring-firestore.service';
+
 
 @Component({
   selector: 'app-player',
@@ -7,6 +9,10 @@ import { Component, Input } from '@angular/core';
 })
 export class PlayerComponent {
 
+  @Input() image: any = 'avatar1'
   @Input() name: any;
+  @Input() player_active: boolean = false;
+
+  constructor (public RingFirestoreService: RingFirestoreService) {}
 
 }

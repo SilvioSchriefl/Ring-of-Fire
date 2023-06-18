@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RingFirestoreService } from '../ring-firestore.service';
+import { Game } from 'src/models/game';
+
+
+
+
 
 @Component({
   selector: 'app-start-screen',
@@ -8,12 +14,11 @@ import { Router } from '@angular/router';
 })
 export class StartScreenComponent {
 
-  constructor(private router: Router) {}
+
+
+  constructor(private router: Router, public RingFirestoreService: RingFirestoreService) { }
 
   newGame() {
-    this.router.navigateByUrl('/game')
+    this.RingFirestoreService.createGame();    
   }
-
-  
-
 }
