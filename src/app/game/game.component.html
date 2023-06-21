@@ -1,8 +1,11 @@
-<app-mobile-player (click)="editPlayer(RingFirestoreService.game_data.current_player)" class="mobile_player visible" [image]="this.RingFirestoreService.game_data.avatar_images[RingFirestoreService.game_data.current_player]" [player]="this.RingFirestoreService.active_player"></app-mobile-player>
+<app-mobile-player (click)="editPlayer(RingFirestoreService.game_data.current_player)" class="mobile_player visible"
+    [image]="this.RingFirestoreService.game_data.avatar_images[RingFirestoreService.game_data.current_player]"
+    [player]="this.RingFirestoreService.game_data.players[RingFirestoreService.game_data.current_player]"></app-mobile-player>
 
 <app-player (click)="editPlayer(i)" *ngFor="let player of RingFirestoreService.game_data.players; let i = index;"
     [ngStyle]="{'top.px' : 100 + (100*i)}" [name]=player
-    [player_active]="i == RingFirestoreService.game_data.current_player" [image]="RingFirestoreService.game_data.avatar_images[i]" class="player_icon d_none_mobile"></app-player>
+    [player_active]="i == RingFirestoreService.game_data.current_player"
+    [image]="RingFirestoreService.game_data.avatar_images[i]" class="player_icon d_none_mobile"></app-player>
 <div class="play_field">
     <div class="played_card ">
         <img *ngFor="let card of RingFirestoreService.game_data.played_cards; let i = index;"
@@ -11,11 +14,12 @@
     <div class="card_stack">
         <img src="/assets/img/cards/card_cover.jpg" class="cover_card"
             [class.z_index]="!RingFirestoreService.game_data.d_none">
-        <img *ngFor="let card of [0,1,2,3,4]; let i = index;" [ngStyle]="{'right.px' : i*5, 'top.px' : i*5}"
-            src="/assets/img/cards/card_cover.jpg" alt="" class="card">
-        <div class="flipp_box">
+        <img *ngFor="let card of RingFirestoreService.dummy_stack ; let i = index;" [ngStyle]="{'right.px' : i*5, 'top.px' : i*5}"
+            src="/assets/img/cards/card_cover.jpg"  class="card">
+        <img src="/assets/img/cards/card_cover.jpg" class="cover_card">
+        <div  class="flipp_box">
             <div class="flip-box-inner" [class.rotate]="RingFirestoreService.game_data.pick_card_animation">
-                <div class="flip-box-front">
+                <div  class="flip-box-front">
                     <img (click)="pickCard()"
                         [class.top_card_hover]="!RingFirestoreService.game_data.pick_card_animation"
                         src="/assets/img/cards/card_cover.jpg">
@@ -31,8 +35,13 @@
 <app-drink-description [card]="this.RingFirestoreService.game_data.top_card" class="card_drink"></app-drink-description>
 <div class="notice_player_div">
     <span class="notice_player" [class.d_none]="this.RingFirestoreService.game_data.players.length > 0">Please add
-        aplayer →</span>
-    <button (click)="openDialog()" mat-fab color="primary">
+        a player →</span>
+    <button [disabled]="this.RingFirestoreService.game_over" (click)="openDialog()" mat-fab color="primary">
         <mat-icon>add</mat-icon>
+    </button>
+</div>
+<div class="new_game">
+    <button  (click)="this.RingFirestoreService.newGame()" mat-fab color="primary">
+        <mat-icon>close</mat-icon>
     </button>
 </div>

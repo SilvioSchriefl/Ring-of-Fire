@@ -1,4 +1,4 @@
 <div class="player">
-<img src="/assets/img/{{ image }}.png">
+<img *ngIf="RingFirestoreService.game_data.players.length > 0" src="/assets/img/{{ image }}.png">
 <span>{{ player }}</span>
 </div>

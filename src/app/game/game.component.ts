@@ -24,8 +24,17 @@ export class GameComponent implements OnInit {
 
 
   pickCard() {
-    if (this.RingFirestoreService.game_data.players.length == 0) return
+    if (this.RingFirestoreService.game_data.players.length == 0 || this.RingFirestoreService.game_over == true) return
     this.RingFirestoreService.game_data.pick_card_animation = true;
+    this.setTimeOuts();
+    this.RingFirestoreService.game_data.top_card = this.RingFirestoreService.game_data.stack.pop()!;
+    this.changeActivePlayer();
+    this.RingFirestoreService.updateGame()
+    this.checkForGameOver();
+  }
+
+
+  setTimeOuts() {
     setTimeout(() => {
       this.RingFirestoreService.game_data.put_on_table_animation = true
       this.RingFirestoreService.updateGame()
@@ -39,7 +48,6 @@ export class GameComponent implements OnInit {
       this.RingFirestoreService.game_data.put_on_table_animation = false
       this.RingFirestoreService.updateGame()
     }, 2000);
-
     setTimeout(() => {
       this.RingFirestoreService.game_data.pick_card_animation = false
       this.RingFirestoreService.updateGame()
@@ -48,17 +56,21 @@ export class GameComponent implements OnInit {
       this.RingFirestoreService.game_data.played_cards.push(this.RingFirestoreService.game_data.top_card)
       this.RingFirestoreService.updateGame()
     }, 1800);
-    this.RingFirestoreService.game_data.top_card = this.RingFirestoreService.game_data.stack.pop()!;
-    this.changeActivePlayer();
-    this.RingFirestoreService.updateGame()
   }
+
+  checkForGameOver() {
+    if (this.RingFirestoreService.game_data.stack.length == 0) {
+      this.RingFirestoreService.game_over = true;
+      setTimeout(() => this.RingFirestoreService.newGame(), 2000);
+    }
+  }
+
 
   changeActivePlayer() {
     this.RingFirestoreService.game_data.current_player++;
     this.RingFirestoreService.game_data.current_player = this.RingFirestoreService.game_data.current_player % this.RingFirestoreService.game_data.players.length;
-    this.RingFirestoreService.active_player = this.RingFirestoreService.game_data.players[this.RingFirestoreService.game_data.current_player]
-
   }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
@@ -68,6 +80,7 @@ export class GameComponent implements OnInit {
       }
     });
   }
+
 
   editPlayer(i: any): void {
     const dialogRef = this.dialog.open(DialogEditPlayerComponent);
@@ -81,10 +94,10 @@ export class GameComponent implements OnInit {
         this.RingFirestoreService.game_data.avatar_images[i] = name
         this.RingFirestoreService.updateGame();
       }
-        if (!this.RingFirestoreService.avatar_images.includes(name)) {
-          this.RingFirestoreService.game_data.players[i] = name
-          this.RingFirestoreService.updateGame();
-        }
+      if (!this.RingFirestoreService.avatar_images.includes(name) && name && name != 'del') {
+        this.RingFirestoreService.game_data.players[i] = name
+        this.RingFirestoreService.updateGame();
+      }
     });
   }
 }

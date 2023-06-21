@@ -6,6 +6,7 @@ import { Firestore, collectionData, getDoc, getFirestore, onSnapshot, setDoc } f
 import { Router } from '@angular/router';
 import { DialogChangeAvatarComponent } from './dialog-change-avatar/dialog-change-avatar.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogNewgameComponent } from './dialog-newgame/dialog-newgame.component';
 
 
 @Injectable({
@@ -18,7 +19,8 @@ export class RingFirestoreService {
   public id = ''
   db = getFirestore()
   route: string = ''
-  active_player = ''
+  game_over = false
+  dummy_stack = []
   public game_data: any =
     {
       players: [],
@@ -62,7 +64,26 @@ export class RingFirestoreService {
 
   }
 
+  deleteGame() {
+    this.game_data = {
+      players: [],
+      avatar_images: [],
+      stack: [],
+      played_cards: [],
+      current_player: 0,
+      id: this.game_data.id,
+      pick_card_animation: false,
+      put_on_table_animation: false,
+      d_none: true,
+      top_card: '14_of_dummy'
+    }
+    this.fillStack();
+    this.updateGame();
+    this.game_over = false;
+  }
+
   fillStack() {
+    this.dummy_stack.length = 5
     for (let i = 1; i < 14; i++) {
       this.game_data.stack.push(i + '_of_clubs')
       this.game_data.stack.push(i + '_of_diamonds')
@@ -94,10 +115,16 @@ export class RingFirestoreService {
     dialogRef.afterClosed().subscribe(img => {
       if (img.length > 0) {
         this.game_data.players.push(name);
-        this.active_player = this.game_data.players[this.game_data.current_player]
         this.game_data.avatar_images.push(img)
         this.updateGame();
       }
+    });
+  }
+
+  newGame(): void {
+    const dialogRef = this.dialog.open(DialogNewgameComponent);
+    dialogRef.afterClosed().subscribe(x => {
+      if (x =='new') this.deleteGame()    
     });
   }
 }

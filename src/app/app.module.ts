@@ -23,6 +23,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { MobilePlayerComponent } from './mobile-player/mobile-player.component';
 import { DialogChangeAvatarComponent } from './dialog-change-avatar/dialog-change-avatar.component';
 import { DialogEditPlayerComponent } from './dialog-edit-player/dialog-edit-player.component';
+import { DialogNewgameComponent } from './dialog-newgame/dialog-newgame.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DialogEditPlayerComponent } from './dialog-edit-player/dialog-edit-play
     DrinkDescriptionComponent,
     MobilePlayerComponent,
     DialogChangeAvatarComponent,
-    DialogEditPlayerComponent
+    DialogEditPlayerComponent,
+    DialogNewgameComponent
   ],
   imports: [
     MatCardModule,
