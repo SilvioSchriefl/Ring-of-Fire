@@ -59,7 +59,6 @@ export class RingFirestoreService {
     this.game_data = docSnap.data();
     onSnapshot(doc(this.db, "Game", this.game_data.id), (doc) => {
       this.game_data = doc.data();
-      console.log("Current data: ", this.game_data);
     });
 
   }
